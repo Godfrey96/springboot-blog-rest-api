@@ -2,11 +2,13 @@ package com.skomane.blog.service.impl;
 
 import com.skomane.blog.dto.PostDTO;
 import com.skomane.blog.exception.PostNotFoundException;
+import com.skomane.blog.mapper.PostMapper;
 import com.skomane.blog.model.Post;
 import com.skomane.blog.repository.PostRepository;
 import com.skomane.blog.service.AuthService;
 import com.skomane.blog.service.PostService;
 import lombok.RequiredArgsConstructor;
+//import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,10 @@ import static java.util.stream.Collectors.toList;
 public class PostServiceImpl implements PostService {
 
     private final AuthService authService;
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
+//    private final PostMapper postMapper;
+//    private final ModelMapper modelMapper;
+
 
     @Override
     public List<PostDTO> getAllPosts() {
@@ -41,6 +46,8 @@ public class PostServiceImpl implements PostService {
     }
 
     private PostDTO mapFromPostToDto(Post post) {
+//        PostDTO postRequest = modelMapper.map(post, PostDTO.class);
+
         PostDTO postDTO = new PostDTO();
         postDTO.setId(post.getId());
         postDTO.setTitle(post.getTitle());
@@ -50,6 +57,7 @@ public class PostServiceImpl implements PostService {
     }
 
     private Post mapFromDtoToPost(PostDTO postDTO) {
+//        Post post = modelMapper.map(postRequest, Post.class);
         Post post = new Post();
         post.setTitle(postDTO.getTitle());
         post.setContent(postDTO.getContent());
